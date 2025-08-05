@@ -19,14 +19,18 @@ helm install karmada -n karmada-system --create-namespace --dependency-update ./
 
 ## Installing the Chart
 
-There are two installation methods, local and remote, to install the chart with the release name `karmada` in namespace `karmada-system`.
+There are two installation methods, local and remote, to install the chart with the release name `karmada`. Karmada can be installed in any namespace, though `karmada-system` is commonly used.
 
 ### Local installation
 
 Switch to the `root` directory of the repo.
 
 ```console
+# Install in the default karmada-system namespace
 helm install karmada -n karmada-system --create-namespace --dependency-update ./charts/karmada
+
+# Or install in a custom namespace
+helm install karmada -n my-karmada-namespace --create-namespace --dependency-update ./charts/karmada
 ```
 
 ### Remote installation
@@ -49,7 +53,15 @@ helm search repo karmada
 Install the chart and specify the version to install with the --version argument. Replace <x.x.x> with your desired version.
 
 ```console
+# Install in the default karmada-system namespace
 helm --namespace karmada-system upgrade -i karmada karmada-charts/karmada --version=<x.x.x> --create-namespace
+
+# Or install in a custom namespace  
+helm --namespace my-karmada-namespace upgrade -i karmada karmada-charts/karmada --version=<x.x.x> --create-namespace
+```
+
+Example output:
+```
 Release "karmada" does not exist. Installing it now.
 NAME: karmada
 LAST DEPLOYED: Mon May 30 07:19:36 2022
